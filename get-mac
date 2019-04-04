@@ -1,0 +1,13 @@
+import pexpect
+path = ('/home/osboxes/scripts/mac-table.csv')
+newfile=open(path,'w')
+child = pexpect.spawn('telnet 172.16.2.212')
+child.expect('Username:')
+child.sendline('admin')
+child.expect('Password:')
+child.sendline('ZxOp34ed')
+child.expect('<CAP01-DC_2_Acceso>')
+child.sendline('display mac-address')
+child.expect('<CAP01-DC_2_Acceso>')
+childstr = child.before.decode('utf-8')
+childlist = childstr.splitlines()
